@@ -99,7 +99,29 @@
 						<h3>Injection</h3>
 					</section>
 					<section>
-
+						<p>When an attacker sends hostile data to an interpreter</p>
+					</section>
+					<section>
+						<h3>Types of Injection</h3>
+						<p class="fragment">SQL</p>
+						<p class="fragment">LDAP</p>
+						<p class="fragment">XPath</p>
+						<p class="fragment">NoSQL queries</p>
+						<p class="fragment">And many more...</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Data Loss</p>
+						<p class="fragment">Data Corruption</p>
+						<p class="fragment">Data Disclosure</p>
+						<p class="fragment">Loss of Accountability</p>
+						<p class="fragment">Denial of Access</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Validate input on the backend</p>
+						<p class="fragment">Use an ORM</p> 
+						<p class="fragment">No concatenation</p>
 					</section>
 				</section>
 
@@ -108,7 +130,27 @@
 						<h3>Broken Authentication</h3>
 					</section>
 					<section>
-						
+						<p>Exactly what it sounds like...</p>
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">App allows credential stuffing</p>
+						<p class="fragment">App allows brute force</p>
+						<p class="fragment">Bad passwords & password recovery</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Depends on your app...</p>
+						<p class="fragment">Leak sensitive information</p>
+						<p class="fragment">Money laundering</p>
+						<p class="fragment">Identity theft</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Remove default logins</p>
+						<p class="fragment">Password restrictions</p>
+						<p class="fragment">Session manager</p>
+						<p class="fragment">Multi-factor authentication!</p>
 					</section>
 				</section>
 
@@ -117,7 +159,26 @@
 						<h3>Sensitive Data Exposure</h3>
 					</section>
 					<section>
-						
+						Not encrypting the right stuff
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">Sending data in plain text</p>
+						<p class="fragment">Weak key generation</p>
+						<p class="fragment">Weak storage techniques</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Comprised data</p>
+						<p class="fragment">Personal information</p>
+						<p class="fragment">Health records</p>
+						<p class="fragment">Credit cards</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Store only the necessary data</p>
+						<p class="fragment">Encrypt all sensitive data</p>
+						<p class="fragment">Disable caching</p>
 					</section>
 				</section>
 
@@ -126,7 +187,25 @@
 						<h3>XML External Entities (XXE)</h3>
 					</section>
 					<section>
-						
+						<p>Exploitation of vulnerable XML processors</p>
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">App accepts XML directly</p>
+						<p class="fragment">Not frequently tested</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Data can be extracted</p>
+						<p class="fragment">Execution of remote requests</p>
+						<p class="fragment">Scan internal systems</p>
+						<p class="fragment">DOS attacks</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Don't use XML</p>
+						<p class="fragment">Ensure everything is updated</p>
+						<p class="fragment">Validate the XML</p>
 					</section>
 				</section>
 
@@ -135,7 +214,25 @@
 						<h3>Broken Access Control</h3>
 					</section>
 					<section>
-						
+						<p>Users performing unauthorized actions</p>
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">Lack of automated detection</p>
+						<p class="fragment">Lack of testing</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Attackers can act as users or admins</p>
+						<p class="fragment">Could do anything that user could</p>
+						<p class="fragment">Ability to create, read, update, and delete records</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Deny by default</p>
+						<p class="fragment">Enforce record ownership</p>
+						<p class="fragment">Log access control failures</p>
+						<p class="fragment">JWT Tokens should be invalidated</p>
 					</section>
 				</section>
 
@@ -144,7 +241,24 @@
 						<h3>Security Misconfiguration</h3>
 					</section>
 					<section>
-						
+						Attempt to gain unauthorized access or knowledge
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">Leaving bugs unpatched</p>
+						<p class="fragment">Default accounts</p>
+						<p class="fragment">Leaving files unprotected</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Unauthorized access to system data</p>
+						<p class="fragment">Could result in complete system compromise</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">CD & CI</p>
+						<p class="fragment">No unnecessary features</p>
+						<p class="fragment">Segmented app architecture</p>
 					</section>
 				</section>
 
@@ -153,7 +267,25 @@
 						<h3>Cross-Site Scripting (XSS)</h3>
 					</section>
 					<section>
-						
+						Injecting malicious scripts in order for data to be sent elsewhere
+					</section>
+					<section>
+						<h3>Types of XSS</h3>
+						<p class="fragment">Reflected</p>
+						<p class="fragment">Stored</p>
+						<p class="fragment">DOM</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Depends on the type...</p>
+						<p class="fragment">Moderate for reflected & DOM</p>
+						<p class="fragment">Severe for stored</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Frameworks to escape XSS automatically</p>
+						<p class="fragment">Escaping untrusted HTTP request data</p>
+						<p class="fragment">Enable CSP</p>
 					</section>
 				</section>
 
@@ -162,7 +294,23 @@
 						<h3>Insecure Deserialization</h3>
 					</section>
 					<section>
-						
+						<p>Deserializing untrusted, potentially malicious objects</p>
+					</section>
+					<section>
+						<h3>Common Mistakes</h3>
+						<p class="fragment">Deserializing anything and everything</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Remote code execution</p>
+						<p class="fragment">Ability to create, read, update, and delete records</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Don't serialize untrusted objects</p>
+						<p class="fragment">Integrity checks</p>
+						<p class="fragment">Type constraints</p>
+						<p class="fragment">Logging</p>
 					</section>
 				</section>
 
@@ -171,7 +319,22 @@
 						<h3>Using Components with Known Vulnerabilities</h3>
 					</section>
 					<section>
-						
+						<p>It's in the name</p>
+					</section>
+					<section>
+						<img src="images\aspen.jpg"/>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Could range in severity</p>
+						<p class="fragment">Could be minor...</p>
+						<p class="fragment">but has been the cause of some of the largest breaches</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Don't keep what you don't use</p>
+						<p class="fragment">Inventory versions</p>
+						<p class="fragment">Keep updated</p>
 					</section>
 				</section>
 
@@ -180,7 +343,18 @@
 						<h3>Insufficient Logging & Monitoring</h3>
 					</section>
 					<section>
-						
+						<p>Failing to log important events</p>
+					</section>
+					<section>
+						<h3>Impacts</h3>
+						<p class="fragment">Threats that could have been stopped get through</p>
+						<p class="fragment">Could result in a severe breach</p>
+					</section>
+					<section>
+						<h3>Prevention</h3>
+						<p class="fragment">Log all authentication/authorization related events</p>
+						<p class="fragment">Format logs</p>
+						<p class="fragment">Leave a paper trail</p>
 					</section>
 				</section>
 			</div>
