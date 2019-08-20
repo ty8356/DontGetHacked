@@ -76,7 +76,7 @@
 				<section>
 					<section>
 						<h3>OWASP</h3>
-						<h5>Open Web Application Security Project</h5>
+						<h5 class="fragment">Open Web Application Security Project</h5>
 					</section>
 					<section>
 						<ul>
@@ -99,6 +99,9 @@
 						<h3>Injection</h3>
 					</section>
 					<section>
+						<img src="images\injection.jpg"/>
+					</section>
+					<section>
 						<p>When an attacker sends hostile data to an interpreter</p>
 					</section>
 					<section>
@@ -108,6 +111,11 @@
 						<p class="fragment">XPath</p>
 						<p class="fragment">NoSQL queries</p>
 						<p class="fragment">And many more...</p>
+					</section>
+					<section>
+						<h3>What could I be doing wrong?</h3>
+						<p class="fragment">Blindly accepting input</p>
+						<p class="fragment">Concatenation</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -130,13 +138,16 @@
 						<h3>Broken Authentication</h3>
 					</section>
 					<section>
+						<img src="images\brokenlock.jpg" height="300"/>
+					</section>
+					<section>
 						<p>Exactly what it sounds like...</p>
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
-						<p class="fragment">App allows credential stuffing</p>
-						<p class="fragment">App allows brute force</p>
-						<p class="fragment">Bad passwords & password recovery</p>
+						<h3>What could I be doing wrong?</h3>
+						<p class="fragment">Allowing credential stuffing</p>
+						<p class="fragment">Allowing brute force</p>
+						<p class="fragment">Bad password restrictions & recovery</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -159,10 +170,13 @@
 						<h3>Sensitive Data Exposure</h3>
 					</section>
 					<section>
+						<img src="images\number3.gif"/>
+					</section>
+					<section>
 						Not encrypting the right stuff
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
+						<h3>What could I be doing wrong?!</h3>
 						<p class="fragment">Sending data in plain text</p>
 						<p class="fragment">Weak key generation</p>
 						<p class="fragment">Weak storage techniques</p>
@@ -187,12 +201,15 @@
 						<h3>XML External Entities (XXE)</h3>
 					</section>
 					<section>
+						<img src="images\xml.jpg"/>
+					</section>
+					<section>
 						<p>Exploitation of vulnerable XML processors</p>
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
-						<p class="fragment">App accepts XML directly</p>
-						<p class="fragment">Not frequently tested</p>
+						<h3>What could I be doing wrong?!!</h3>
+						<p class="fragment">Accepting XML directly</p>
+						<p class="fragment">Not testing</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -214,12 +231,15 @@
 						<h3>Broken Access Control</h3>
 					</section>
 					<section>
+						<img src="images/access.jpg"/>
+					</section>
+					<section>
 						<p>Users performing unauthorized actions</p>
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
+						<h3>What could I be doing wrong?!?!</h3>
 						<p class="fragment">Lack of automated detection</p>
-						<p class="fragment">Lack of testing</p>
+						<p class="fragment">Not testing</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -241,10 +261,13 @@
 						<h3>Security Misconfiguration</h3>
 					</section>
 					<section>
+						<img src="images/gears.jpg"/>
+					</section>
+					<section>
 						Attempt to gain unauthorized access or knowledge
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
+						<h3>What could be wrong????</h3>
 						<p class="fragment">Leaving bugs unpatched</p>
 						<p class="fragment">Default accounts</p>
 						<p class="fragment">Leaving files unprotected</p>
@@ -267,6 +290,9 @@
 						<h3>Cross-Site Scripting (XSS)</h3>
 					</section>
 					<section>
+						<img src="images\script.gif">
+					</section>
+					<section>
 						Injecting malicious scripts in order for data to be sent elsewhere
 					</section>
 					<section>
@@ -274,6 +300,10 @@
 						<p class="fragment">Reflected</p>
 						<p class="fragment">Stored</p>
 						<p class="fragment">DOM</p>
+					</section>
+					<section>
+						<h3>What's going on!?</h3>
+						<p class="fragment">Blindly accepting input again</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -294,10 +324,13 @@
 						<h3>Insecure Deserialization</h3>
 					</section>
 					<section>
+						<img src="images/deserialization.jpg"/>
+					</section>
+					<section>
 						<p>Deserializing untrusted, potentially malicious objects</p>
 					</section>
 					<section>
-						<h3>Common Mistakes</h3>
+						<h3>What's the problem?!</h3>
 						<p class="fragment">Deserializing anything and everything</p>
 					</section>
 					<section>
@@ -319,10 +352,16 @@
 						<h3>Using Components with Known Vulnerabilities</h3>
 					</section>
 					<section>
+						<img src="images/vulnerabilities.jpg">
+					</section>
+					<section>
 						<p>It's in the name</p>
 					</section>
 					<section>
 						<img src="images\aspen.jpg"/>
+					</section>
+					<section>
+						<h3>What could I be doing wrong?!</h3>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -343,7 +382,13 @@
 						<h3>Insufficient Logging & Monitoring</h3>
 					</section>
 					<section>
+						<img src="images/log.jpg"/>
+					</section>
+					<section>
 						<p>Failing to log important events</p>
+					</section>
+					<section>
+						<h3>What could I be doing wrong?!</h3>
 					</section>
 					<section>
 						<h3>Impacts</h3>
