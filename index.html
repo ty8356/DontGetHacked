@@ -99,7 +99,7 @@
 						<h3>Injection</h3>
 					</section>
 					<section>
-						<img src="images\injection.jpg"/>
+						<img src="images\sqlinjection.jpg"/>
 					</section>
 					<section>
 						<p>When an attacker sends hostile data to an interpreter</p>
@@ -127,9 +127,71 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Validate input on the backend</p>
-						<p class="fragment">Use an ORM</p> 
-						<p class="fragment">No concatenation</p>
+					</section>
+					<section>
+						<p>Validate input on the backend</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[HttpGet]
+							public void Get([FromQuery] string search)
+							{
+								var query = "SELECT * FROM Pets WHERE Id = " + search;
+
+								// Execute the query
+							}
+						</code></pre>
+					</section>
+					<section>
+						<p class="fragment">search = "1"</p>
+						<pre class="fragment"><code data-trim>
+							SELECT * FROM Pets WHERE Id = 1
+						</code></pre>
+						<p class="fragment">search = "1 OR 1=1"</p>
+						<pre class="fragment"><code data-trim>
+							SELECT * FROM Pets WHERE Id = 1 OR 1=1
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[HttpGet]
+							public void Get([FromQuery] int search)
+							{
+								var query = "SELECT * FROM Pets WHERE Id = " + search;
+
+								// Execute the query
+							}
+						</code></pre>
+					</section>
+					<section>
+						<p>Use Entity Framework</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[HttpGet]
+							public void Get([FromQuery] int id)
+							{
+								var pet = _context
+									.Pets
+									.Find(id);
+
+								// Do other stuff
+							}
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[HttpGet]
+							public void Get([FromQuery] string search)
+							{
+								var pets = _context
+									.Pets
+									.Where(pet => pet
+										.Name == search);
+
+								// Do other stuff
+							}
+						</code></pre>
 					</section>
 				</section>
 
@@ -138,7 +200,7 @@
 						<h3>Broken Authentication</h3>
 					</section>
 					<section>
-						<img src="images\brokenlock.jpg" height="300"/>
+						<img src="images\youshallnotpass.jpg" height="300"/>
 					</section>
 					<section>
 						<p>Exactly what it sounds like...</p>
@@ -158,10 +220,44 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Remove default logins</p>
-						<p class="fragment">Password restrictions</p>
-						<p class="fragment">Session manager</p>
-						<p class="fragment">Multi-factor authentication!</p>
+					</section>
+					<section>
+						<p>Remove default logins</p>
+					</section>
+					<section>
+						<p class="fragment">admin</p>
+						<p class="fragment">P@ssw0rd</p>
+					</section>
+					<section>
+						<p>Password restrictions</p>
+					</section>
+					<section>
+						<ul>
+							<li class="fragment">Minimum length</li>
+							<li class="fragment">Maximum age</li>
+							<li class="fragment">History</li>
+							<li class="fragment">Complexity</li>
+						</ul>
+					</section>
+					<section>
+						<p>ASP.NET Identity</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							services.Configure&lt;IdentityOptions&gt;(options =>
+								{
+									// Default Password settings.
+									options.Password.RequireDigit = true;
+									options.Password.RequireLowercase = true;
+									options.Password.RequireNonAlphanumeric = true;
+									options.Password.RequireUppercase = true;
+									options.Password.RequiredLength = 6;
+									options.Password.RequiredUniqueChars = 1;
+								});
+						</code></pre>
+					</section>
+					<section>
+						<p>Multi-factor authentication!</p>
 					</section>
 				</section>
 
@@ -190,9 +286,28 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Store only the necessary data</p>
-						<p class="fragment">Encrypt all sensitive data</p>
-						<p class="fragment">Disable caching</p>
+					</section>
+					<section>
+						<p>Store only necessary data</p>
+					</section>
+					<section>
+						<p>Use HTTPS</p>
+					</section>
+					<section>
+						<img src="images/httpsonly.PNG" />
+					</section>
+					<section>
+						<p>Disable caching</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[ResponseCache(Duration = 0, 
+								Location = ResponseCacheLocation.None, NoStore = true)]
+							public class PetsController : Controller
+							{
+								// control the things
+							}
+						</code></pre>
 					</section>
 				</section>
 
@@ -220,9 +335,21 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Don't use XML</p>
-						<p class="fragment">Ensure everything is updated</p>
-						<p class="fragment">Validate the XML</p>
+					</section>
+					<section>
+						<p>Don't use XML</p>
+					</section>
+					<section>
+						<p>Don't allow external entities to resolve at all</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							var xmlDocument = new XmlDocument();
+							xmlDocument.XmlResolver = null;
+						</code></pre>
+					</section>
+					<section>
+						<p>Keep libraries updated</p>
 					</section>
 				</section>
 
@@ -231,7 +358,7 @@
 						<h3>Broken Access Control</h3>
 					</section>
 					<section>
-						<img src="images/access.jpg"/>
+						<img src="images/accesscontrol.jpg" height="400"/>
 					</section>
 					<section>
 						<p>Users performing unauthorized actions</p>
@@ -249,10 +376,28 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Deny by default</p>
-						<p class="fragment">Enforce record ownership</p>
-						<p class="fragment">Log access control failures</p>
-						<p class="fragment">JWT Tokens should be invalidated</p>
+					</section>
+					<section>
+						<p>Deny by default</p>
+					</section>
+					<section>
+						<p>Record ownership</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							[Authorize(Roles = "Administrator")]
+							public class PetsController : Controller
+							{
+								// control the things
+							}
+						</code></pre>
+					</section>
+					<section>
+						<p>Log access control failures</p>
+					</section>
+					<section>
+						<p class="fragment">ASP.NET Identity</p>
+						<p class="fragment">Third party loggers</p>
 					</section>
 				</section>
 
