@@ -65,8 +65,13 @@
 							<li class="fragment">Overview of OWASP</li>
 							<li class="fragment">Preventive measures for .NET</li>
 							<li class="fragment">A good time</li>
-							<li class="fragment">Disclaimer: I am NOT a security profressional</>
+							<li class="fragment">Disclaimer: I am NOT a security professional</>
 						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Like to take stuff I know nothing about do a talk on it</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
@@ -126,12 +131,24 @@
 				<section>
 					<section>
 						<h3>Injection</h3>
+						<aside class="notes">
+							<ul>
+								<li>Injection section!</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images\sqlinjection.jpg" height="300"/>
 					</section>
 					<section>
 						<p>When an attacker sends hostile data to an interpreter</p>
+						<aside class="notes">
+							<ul>
+								<li>Occurs when untrusted data is sent to an interpreter as part of a command or query</li>
+								<li>Tricks the interpreter into executing unintended commands or accessing data without proper authorization</li>
+								<li>Obviously, we've all heard of SQL injection</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Types of Injection</h3>
@@ -140,6 +157,19 @@
 						<p class="fragment">XPath</p>
 						<p class="fragment">NoSQL queries</p>
 						<p class="fragment">And many more...</p>
+						<aside class="notes">
+							<ul>
+								<li>Some of the more common injections are SQL, NoSQL, OS command, Object Relational Mapping (ORM), LDAP, and Expression Language (EL) or Object Graph Navigation Library (OGNL) injection.</li>
+								<li>SQL</li>
+								<li>NoSQL</li>
+								<li>OS Command</li>
+								<li>Object Relational Mapping (ORM)</li>
+								<li>Lightweight Directory Access Protocol (LDAP) - similar to SQL but against Active Directory</li>
+								<li>Expression Language (EL) - used in Java web applications for embedding expressions into web pages</li>
+								<li>Object Graph Navigation Library (OGNL) - more Java</li>
+							</ul>
+						</aside>
+
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
@@ -159,6 +189,13 @@
 					</section>
 					<section>
 						<p>Validate input on the backend</p>
+						<aside class="notes">
+							<ul>
+								<li>There are a couple ways you could do this</li>
+								<li>Validate directly, checking to see if the input matches a set string</li>
+								<li>Use explicit types</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -170,6 +207,15 @@
 								// Execute the query
 							}
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>So here's a pretty good example</li>
+								<li>Obviously, there are a few things that could be done differently here</li>
+								<li>We have an API endpoint that is searching for a pet by ID</li>
+								<li>But not very well</li>
+								<li>I'm assuming that most of us wouldn't do it like this</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p class="fragment">search = "1"</p>
@@ -180,6 +226,17 @@
 						<pre class="fragment"><code data-trim>
 							SELECT * FROM Pets WHERE Id = 1 OR 1=1
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>So what happens if it's called like it's supposed to be?</li>
+								<li>Everything's great!</li>
+								<li>BUT, what if someone calls the endpoint maliciously?</li>
+								<li>We have a different story</li>
+								<li>This is what our concatenated SQL query would look like</li>
+								<li>So what does this mean?</li>
+								<li>1=1 pretty much invalidates our query and everything is returned</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -191,9 +248,22 @@
 								// Execute the query
 							}
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>Let's add a data type</li>
+								<li>Now, our attacker literally CAN'T pass in the malicious string</li>
+								<li>It HAS to be an ID</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Use Entity Framework</p>
+						<aside class="notes">
+							<ul>
+								<li>Another great option is to use an ORM</li>
+								<li>That way, everything is done for us</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -207,6 +277,13 @@
 								// Do other stuff
 							}
 						</code></pre>
+
+						<aside class="notes">
+							<ul>
+								<li>So that takes our SQL query, and allows us to write it like this</li>
+								<li>Our threat disappears</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -221,6 +298,12 @@
 								// Do other stuff
 							}
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>Even if we change the data type back to a string, EF still thwarts the attack</li>
+								<li>Linq queries are not created using concatenation, so we don't need to worry about injection here</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
@@ -230,15 +313,32 @@
 					</section>
 					<section>
 						<img src="images\youshallnotpass.jpg" height="300"/>
+						<aside class="notes">
+							<ul>
+								<li>This is what we want to say, but it doesn't always happen</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Exactly what it sounds like...</p>
+						<aside class="notes">
+							<ul>
+								<li>Your auth is broken...?</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
 						<p class="fragment">Allowing credential stuffing</p>
 						<p class="fragment">Allowing brute force</p>
 						<p class="fragment">Bad password restrictions & recovery</p>
+						<aside class="notes">
+							<ul>
+								<li>Credential stuffing is the automated injection of breached username/password pairs in order to fraudulently gain access to user accounts.</li>
+								<li>Basically shoving breached usernames and passwords until something works</li>
+								<li>Brute force - basically trying again and again until something works, maybe with a list of passwords?</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -246,16 +346,32 @@
 						<p class="fragment">Leak sensitive information</p>
 						<p class="fragment">Money laundering</p>
 						<p class="fragment">Identity theft</p>
+						<aside class="notes">
+							<ul>
+								<li>Could be this or this or that, just depends on what your software does</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Prevention</h3>
 					</section>
 					<section>
 						<p>Remove default logins</p>
+						<aside class="notes">
+							<ul>
+								<li>Convenient for testing, but also for attackers</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p class="fragment">admin</p>
 						<p class="fragment">P@ssw0rd</p>
+						<aside class="notes">
+							<ul>
+								<li>We've all done it</li>
+								<li>Do not publish with this as an active user account!</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Password restrictions</p>
@@ -270,6 +386,12 @@
 					</section>
 					<section>
 						<p>ASP.NET Identity</p>
+						<aside class="notes">
+							<ul>
+								<li>Can do a lot of what you need for you</li>
+								<li>Easy to get up and running</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -284,9 +406,22 @@
 									options.Password.RequiredUniqueChars = 1;
 								});
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>Here's how you might set it up in a .NET Core 2.0 app</li>
+								<li>This would go in the Startup.cs</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Multi-factor authentication!</p>
+						<aside class="notes">
+							<ul>
+								<li>Use it!!!!</li>
+								<li>Provides extra security</li>
+								<li>Can easily be set up with ASP.NET Identity</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
