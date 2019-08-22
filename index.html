@@ -107,7 +107,7 @@
 					</section>
 					<section>
 						<h3>OWASP Top Ten</h3>
-						<ul>
+						<ol>
 							<li class="fragment">Injection</li>
 							<li class="fragment">Broken Authentication</li>
 							<li class="fragment">Sensitive Data Exposure</li>
@@ -118,7 +118,7 @@
 							<li class="fragment">Insecure Deserialization</li>
 							<li class="fragment">Using Components with Known Vulnerabilities</li>
 							<li class="fragment">Insufficient Logging & Monitoring</li>
-						</ul>
+						</ol>
 						<aside class="notes">
 							<ul>
 								<li>Top ten security weaknesses</li>
@@ -133,6 +133,7 @@
 						<h3>Injection</h3>
 						<aside class="notes">
 							<ul>
+								<li>#1</li>
 								<li>Injection section!</li>
 							</ul>
 						</aside>
@@ -169,7 +170,6 @@
 								<li>Object Graph Navigation Library (OGNL) - more Java</li>
 							</ul>
 						</aside>
-
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
@@ -310,6 +310,11 @@
 				<section>
 					<section>
 						<h3>Broken Authentication</h3>
+						<aside class="notes">
+							<ul>
+								<li>#2</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images\youshallnotpass.jpg" height="300"/>
@@ -428,6 +433,11 @@
 				<section>
 					<section>
 						<h3>Sensitive Data Exposure</h3>
+						<aside class="notes">
+							<ul>
+								<li>#3</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images\number3.gif"/>
@@ -456,12 +466,30 @@
 					</section>
 					<section>
 						<p>Use HTTPS</p>
+						<aside class="notes">
+							<ul>
+								<li>Using HTTPS ensures that all data being sent between the front end and api is encrypted</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/httpsonly.PNG" />
+						<aside class="notes">
+							<ul>
+								<li>There is a setting in the Azure Portal under the Configuration section</li>
+								<li>Super easy to set</li>
+								<li>Redirects from HTTP to HTTPS</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Disable caching</p>
+						<aside class="notes">
+							<ul>
+								<li>Another great way lock down your data would be to prevent caching</li>
+								<li>No data will be left stored on the front end</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -472,12 +500,24 @@
 								// control the things
 							}
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>You can disable cahcing on an endpoint</li>
+								<li>Simply by decorating with this attribute</li>
+								<li>.NET is awesome!</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>XML External Entities (XXE)</h3>
+						<aside class="notes">
+							<ul>
+								<li>#4</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images\xml.jpg"/>
@@ -499,53 +539,112 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
+						<aside class="notes">
+							<ul>
+								<li>Definitely the best way to prevent XXE attacks...</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Don't use XML</p>
+						<aside class="notes">
+							<ul>
+								<li>Whatever you're using XML for, chances are there's a better way to do it</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Don't allow external entities to resolve at all</p>
+						<aside class="notes">
+							<ul>
+								<li>The real problem comes in when you allow external entities to resolve</li>
+								<li>Luckily enough, you can turn that off</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
 							var xmlDocument = new XmlDocument();
 							xmlDocument.XmlResolver = null;
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>So this is just a new instance of System.Xml.XmlDocument</li>
+								<li>And configuring it to NOT load external entities is as simple as setting this property to null!</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Keep libraries updated</p>
+						<aside class="notes">
+							<ul>
+								<li>Not much to be said here, just keep any third party XML processors up to date</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>Broken Access Control</h3>
+						<aside class="notes">
+							<ul>
+								<li>#5</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/accesscontrol.jpg" height="400"/>
 					</section>
 					<section>
 						<p>Users being able to perform unauthorized actions</p>
+						<aside class="notes">
+							<ul>
+								<li>It's a problem if users are able to get around your access control....</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
-						<p class="fragment">Lack of automated detection</p>
 						<p class="fragment">Not testing</p>
+						<aside class="notes">
+							<ul>
+								<li>There are a multitude of ways to test access control, both from the perspective of the front and back end</li>
+								<li>You can even automate some of it</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Impacts</h3>
-						<p class="fragment">Attackers can act as users or admins</p>
-						<p class="fragment">Could do anything that user could</p>
+						<p class="fragment">Attackers can act as other users</p>
 						<p class="fragment">Ability to create, read, update, and delete records</p>
+						<aside class="notes">
+							<ul>
+								<li>"Other users" may include admins</li>
+								<li>Could do anything that user could</li>
+								<li>CRUD access means they could decide to wipe your data</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Prevention</h3>
 					</section>
 					<section>
 						<p>Deny by default</p>
+						<aside class="notes">
+							<ul>
+								<li>Definitely don't set your application up to allow everything unless otherwise specified</li>
+								<li>It may be easier for testing, but it's a recipe for disaster</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Record ownership</p>
+						<aside class="notes">
+							<ul>
+								<li>Great because it limits who can modify records</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -555,9 +654,22 @@
 								// control the things
 							}
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>So here, only users with the admin role can call this endpoint</li>
+								<li>Meaning no other role would be able to modify records within</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Log access control failures</p>
+						<aside class="notes">
+							<ul>
+								<li>Multiple ways to log</li>
+								<li>Will mention some of the more common libraries later</li>
+								<li>Helps you to locate and eliminate threats</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p class="fragment">ASP.NET Identity</p>
@@ -568,18 +680,39 @@
 				<section>
 					<section>
 						<h3>Security Misconfiguration</h3>
+						<aside class="notes">
+							<ul>
+								<li>#6</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/cheeto.jpg"/>
+						<aside class="notes">
+							<ul>
+								<li>You could say this is what misconfigured security looks like?</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
-						Attempt to gain unauthorized access or knowledge
+						Users may be able to gain unauthorized access or knowledge
+						<aside class="notes">
+							<ul>
+								<li>If something is misconfigured and left open, that's bad news</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
 						<p class="fragment">Leaving bugs unpatched</p>
 						<p class="fragment">Default accounts</p>
 						<p class="fragment">Unprotected files</p>
+						<aside class="notes">
+							<ul>
+								<li>You can eliminate a large portion of vulnerabilities by keeping things up to date and patched</li>
+								<li>Files sitting open on the server waiting for someone with the right skillset to come along and grab them</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -591,24 +724,54 @@
 					</section>
 					<section>
 						<p>Minimal features & frameworks</p>
+						<aside class="notes">
+							<ul>
+								<li>Keep everything minimal</li>
+								<li>Don't keep what you don't need?</li>
+								<li>What's the point? Except to open yourself to more types of attacks</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Azure <span class="fragment">DevOps</span></p>
 						<aside class="notes">
-							CI & CD, segmented app architecture
+							<ul>
+								<li>CI & CD</li>
+								<li>Greatly reduces the probability that you misconfigure or mess something up during deployment</li>
+								<li>Press a button and you're done</li>
+							</ul>
 						</aside>
 					</section>
 					<section>
 						<img src="images/build.PNG">
+						<aside class="notes">
+							<ul>
+								<li>Creating a build pipeline</li>
+								<li>Allows you to customize what happens when your app builds before being published to the server</li>
+								<li>Can also do cool things like testing</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/release.PNG">
+						<aside class="notes">
+							<ul>
+								<li>Creating a release pipline</li>
+								<li>Allows you to customize what goes on after the build</li>
+								<li>Where the app is published and such</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>Cross-Site Scripting (XSS)</h3>
+						<aside class="notes">
+							<ul>
+								<li>#7</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/xss.jpg">
@@ -621,6 +784,13 @@
 						<p class="fragment">Reflected</p>
 						<p class="fragment">Stored</p>
 						<p class="fragment">DOM</p>
+						<aside class="notes">
+							<ul>
+								<li>Reflected - The app includes unvalidated and unescaped user input as part of HTML output</li>
+								<li>Stored (critical) - The app stores unsanitized user input that is viewed at a later time by another user or an administrator</li>
+								<li>DOM - Sending attacker-controllable data to unsafe JS APIs</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
@@ -628,15 +798,32 @@
 					</section>
 					<section>
 						<h3>Impacts</h3>
-						<p class="fragment">Depends on the type...</p>
-						<p class="fragment">Moderate for reflected & DOM</p>
-						<p class="fragment">Severe for stored</p>
+						<p class="fragment">Session stealing</p>
+						<p class="fragment">Account takeover</p>
+						<p class="fragment">MFA bypass</p>
+						<p class="fragment">And more...</p>
+						<aside class="notes">
+							<ul>
+								<li>Moderate for reflected and DOM</li>
+								<li>Severe for stored</li>
+								<li>More</li>
+								<li>DOM Node Replacement</li>
+								<li>Attacks against user's browser</li>
+								<li>Malicious software downloads</li>
+								<li>Key logging</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Prevention</h3>
 					</section>
 					<section>
 						<p>Escape untrusted input</p>
+						<aside class="notes">
+							<ul>
+								<li>If you're working with .NET and Razor, this gets easy</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -646,12 +833,29 @@
 						 
 							@untrustedInput
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>You can see the untrusted input at the top</li>
+								<li>If we use that with an @, this is the output on the page</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/xsssnippet.PNG" height="80">
+						<aside class="notes">
+							<ul>
+								<li>So you can see that it escapes the input</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Enable CSP</p>
+						<aside class="notes">
+							<ul>
+								<li>Content Security Policy</li>
+								<li>Basically shuts out any other scrips that would be loaded from anywhere else</li> 
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<pre><code data-trim>
@@ -664,12 +868,22 @@
 								await next();
 							});
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>So here, we're just saying not to load any scripts but the ones we have</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>Insecure Deserialization</h3>
+						<aside class="notes">
+							<ul>
+								<li>#8</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/deserialization.jpg"/>
@@ -680,6 +894,11 @@
 					<section>
 						<h4>What could I be doing wrong?</h4>
 						<p class="fragment">Deserializing anything and everything</p>
+						<aside class="notes">
+							<ul>
+								<li>Accepting raw user input seems to be a theme</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -691,6 +910,11 @@
 					</section>
 					<section>
 						<p>Don't serialize untrusted objects</p>
+						<aside class="notes">
+							<ul>
+								<li>You don't want to be deserializing random data supplied by the user</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Type constraints</p>
@@ -699,21 +923,44 @@
 						<pre><code data-trim>
 							Pet pet = JsonConvert.DeserializeObject&lt;Pet&gt;(jsonString);
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>This makes our lives better, as now we KNOW what we're deserializing to</li>
+								<li>The string has to be deserialized into the object we provide</li>
+								<li>Can't rely on this</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Log deserialization exceptions</p>
+						<aside class="notes">
+							<ul>
+								<li>Really, we should be logging all exceptions</li>
+								<li>We will be in the know if anyone is trying to exploit any part of the app that deserializes data</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>Using Components with Known Vulnerabilities</h3>
+						<aside class="notes">
+							<ul>
+								<li>#9</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/vulnerabilities.jpg">
 					</section>
 					<section>
 						<p>It's in the name</p>
+						<aside class="notes">
+							<ul>
+								<li>This one should be pretty simple</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images\aspen.jpg"/>
@@ -726,27 +973,55 @@
 						<p class="fragment">Could range in severity</p>
 						<p class="fragment">Could be minor...</p>
 						<p class="fragment">but has been the cause of some of the largest breaches</p>
+						<aside class="notes">
+							<ul>
+								<li>Can't really nail this down because components you're using could have any number of vulnerabilities</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Prevention</h3>
 					</section>
 					<section>
 						<p>Don't keep what you don't use</p>
+						<aside class="notes">
+							<ul>
+								<li>You don't want extra luggage</li>
+								<li>Asking for attackers if you're keeping unnecessary libraries</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Update what you do use</p>
+						<aside class="notes">
+							<ul>
+								<li>Can't stress it enough</li>
+								<li>Don't use libraries that haven't been updated in years</li>
+								<li>Keep up to date</li>
+							</ul>
+						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h3>Insufficient Logging & Monitoring</h3>
+						<aside class="notes">
+							<ul>
+								<li>#10</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<img src="images/log.jpg"/>
 					</section>
 					<section>
 						<p>Failing to log important events</p>
+						<aside class="notes">
+							<ul>
+								<li>Failing to log or just not logging at all</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h4>What could I be doing wrong?</h4>
@@ -757,9 +1032,22 @@
 						<h3>Impacts</h3>
 						<p class="fragment">Threats that could have been stopped get through</p>
 						<p class="fragment">Could result in a severe breach</p>
+						<aside class="notes">
+							<ul>
+								<li>When you start logging/monitoring, you will be able to see when attacks are happening and stop them</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h3>Prevention</h3>
+					</section>
+					<section>
+						<p>Azure Application Insights</p>
+						<aside class="notes">
+							<ul>
+								<li>Amazing tool that makes pretty much everything easier</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Logging frameworks</p>
@@ -770,6 +1058,13 @@
 							<li class="fragment">Log4NET</li>
 							<li class="fragment">ELMAH</li>
 						</ul>
+						<aside class="notes">
+							<ul>
+								<li>These are a few of the most common logging frameworks used in .NET</li>
+								<li>I've used NLog in the past and it's easy enough</li>
+								<li>Pick one that you'll use!</li>
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<p>Format logs</p>
@@ -781,6 +1076,22 @@
 
 				<section>
 					<h5>What have we learned?</h5>
+					<aside class="notes">
+						<ul>
+							<li>So we went over OWASP Top Ten</li>
+							<li>Gave some pointers on what you may be able to do to better secure your .NET app</li>
+							<li>Injection</li>
+							<li>Broken Authentication</liass="fragment">
+							<li>Sensitive Data Exposure</liclass="fragment">
+							<li>XML External Entities (XXE)</liclass="fragment">
+							<li>Broken Access Control</liclass="fragment">
+							<li>Security Misconfiguration</liclass="fragment">
+							<li>Cross-Site Scripting (XSS)</liclass="fragment">
+							<li>Insecure Deserialization</liclass="fragment">
+							<li>Using Components with Known Vulnerabilities</liass="fragment">
+							<li>Insufficient Logging & Monitoring</liclass="fragment">
+						</ul>
+					</aside>
 				</section>
 
 				<section>
