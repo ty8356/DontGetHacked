@@ -8,7 +8,8 @@
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -26,8 +27,13 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>Don't Get H@ck3d</h1>
-					<h3>Tyler Stephenson</h3>
+					<h2>Don't Get H@ck3d</h1>
+					<h4>Tyler Stephenson</h3>
+				</section>
+
+				<section>
+					<h3>Thank you, sponsors!</h3>
+					<img id="sponsors" src="images/sponsors.png" height="500">
 				</section>
 
 				<section>
@@ -99,7 +105,7 @@
 						<h3>Injection</h3>
 					</section>
 					<section>
-						<img src="images\sqlinjection.jpg"/>
+						<img src="images\sqlinjection.jpg" height="300"/>
 					</section>
 					<section>
 						<p>When an attacker sends hostile data to an interpreter</p>
@@ -361,7 +367,7 @@
 						<img src="images/accesscontrol.jpg" height="400"/>
 					</section>
 					<section>
-						<p>Users performing unauthorized actions</p>
+						<p>Users being able to perform unauthorized actions</p>
 					</section>
 					<section>
 						<h3>What could I be doing wrong?!?!</h3>
@@ -406,7 +412,7 @@
 						<h3>Security Misconfiguration</h3>
 					</section>
 					<section>
-						<img src="images/gears.jpg"/>
+						<img src="images/cheeto.jpg"/>
 					</section>
 					<section>
 						Attempt to gain unauthorized access or knowledge
@@ -415,7 +421,7 @@
 						<h3>What could be wrong????</h3>
 						<p class="fragment">Leaving bugs unpatched</p>
 						<p class="fragment">Default accounts</p>
-						<p class="fragment">Leaving files unprotected</p>
+						<p class="fragment">Unprotected files</p>
 					</section>
 					<section>
 						<h3>Impacts</h3>
@@ -424,9 +430,21 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">CD & CI</p>
-						<p class="fragment">No unnecessary features</p>
-						<p class="fragment">Segmented app architecture</p>
+					</section>
+					<section>
+						<p>Minimal features & frameworks</p>
+					</section>
+					<section>
+						<p>Azure <span class="fragment">DevOps</span></p>
+						<aside class="notes">
+							CI & CD, segmented app architecture
+						</aside>
+					</section>
+					<section>
+						<img src="images/build.PNG">
+					</section>
+					<section>
+						<img src="images/release.PNG">
 					</section>
 				</section>
 
@@ -435,7 +453,7 @@
 						<h3>Cross-Site Scripting (XSS)</h3>
 					</section>
 					<section>
-						<img src="images\script.gif">
+						<img src="images/xss.jpg">
 					</section>
 					<section>
 						Injecting malicious scripts in order for data to be sent elsewhere
@@ -458,9 +476,36 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Frameworks to escape XSS automatically</p>
-						<p class="fragment">Escaping untrusted HTTP request data</p>
-						<p class="fragment">Enable CSP</p>
+					</section>
+					<section>
+						<p>Escape untrusted input</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							@{
+								var untrustedInput = "&lt;\"123\"&gt;";
+							}
+						 
+							@untrustedInput
+						</code></pre>
+					</section>
+					<section>
+						<img src="images/xsssnippet.PNG" height="80">
+					</section>
+					<section>
+						<p>Enable CSP</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							app.Use(async (context, next) =>
+							{
+								context.Response.Headers.Add(
+									"Content-Security-Policy",
+									"script-src 'self';");
+
+								await next();
+							});
+						</code></pre>
 					</section>
 				</section>
 
@@ -485,10 +530,20 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Don't serialize untrusted objects</p>
-						<p class="fragment">Integrity checks</p>
-						<p class="fragment">Type constraints</p>
-						<p class="fragment">Logging</p>
+					</section>
+					<section>
+						<p>Don't serialize untrusted objects</p>
+					</section>
+					<section>
+						<p>Type constraints</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+							Pet pet = JsonConvert.DeserializeObject&lt;Pet&gt;(jsonString);
+						</code></pre>
+					</section>
+					<section>
+						<p>Log deserialization exceptions</p>
 					</section>
 				</section>
 
@@ -516,9 +571,12 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Don't keep what you don't use</p>
-						<p class="fragment">Inventory versions</p>
-						<p class="fragment">Keep updated</p>
+					</section>
+					<section>
+						<p>Don't keep what you don't use</p>
+					</section>
+					<section>
+						<p>Update what you do use</p>
 					</section>
 				</section>
 
@@ -542,9 +600,28 @@
 					</section>
 					<section>
 						<h3>Prevention</h3>
-						<p class="fragment">Log all authentication/authorization related events</p>
-						<p class="fragment">Format logs</p>
-						<p class="fragment">Leave a paper trail</p>
+					</section>
+					<section>
+						<p>Logging frameworks</p>
+					</section>
+					<section>
+						<ul>
+							<li class="fragment">NLog</li>
+							<li class="fragment">Log4NET</li>
+							<li class="fragment">ELMAH</li>
+						</ul>
+					</section>
+					<section>
+						<p>Format logs</p>
+					</section>
+					<section>
+						<p>Log everything</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Thank you!</h3>
 					</section>
 				</section>
 			</div>
